@@ -2,46 +2,48 @@ import discord
 from discord.ext import commands
 import json
 import random
+import os
 
 with open('setting.json', mode='r', encoding='utf8') as jsonFile:
-    jsonData = json.load(jsonFile)
+	jsonData = json.load(jsonFile)
 
 bot = commands.Bot(command_prefix='!')
 
 @bot.event
 async def on_ready():
-    print("Bot is online")
+	print("Bot is online")
 
 @bot.event
 async def on_member_join(member):
-    print(f'{member}join!')
-    channel = bot.get_channel(int(jsonData['Main_channel']))
-    await channel.send(f'{member}join!')
+	print(f'{member}join!')
+	channel = bot.get_channel(int(jsonData['Main_channel']))
+	await channel.send(f'{member}join!')
 
 @bot.event
 async def on_member_remove(member):
-    print(f'{member}leave!')
-    channel = bot.get_channel(int(jsonData['Main_channel']))
-    await channel.send(f'{member}leave!')
+	print(f'{member}leave!')
+	channel = bot.get_channel(int(jsonData['Main_channel']))
+	await channel.send(f'{member}leave!')
+
+# load,reload,unload commands
+@bot.command()
+async def load(ctx, extension):
+	bot.load_extension(f'cmds.{extension}')
+	await ctx.send(f'Loaded {extension} done.')
 
 @bot.command()
-async def ping(ctx):
-    await ctx.send(f'{round(bot.latency*1000)}(ms)')
+async def unload(ctx, extension):
+	bot.unload_extension(f'cmds.{extension}')
+	await ctx.send(f'Unloaded {extension} done.')
 
 @bot.command()
-async def pic(ctx):
-    pic = discord.File(jsonData['capoo_pic'][0])
-    await ctx.send(file=pic)
+async def reload(ctx, extension):
+	bot.reload_extension(f'cmds.{extension}')
+	await ctx.send(f'Reloaded {extension} done.')
 
-@bot.command()
-async def rand_pic(ctx):
-    random_pic = random.choice(jsonData['capoo_pic'])
-    pic = discord.File(random_pic)
-    await ctx.send(file=pic)
+for filename in os.listdir('./cmds'):
+	if filename.endswith('.py'):
+		bot.load_extension(f'cmds.{filename[:-3]}')
 
-@bot.command()
-async def url_pic(ctx):
-    random_pic = random.choice(jsonData['url_pic'])
-    await ctx.send(random_pic)
-
-bot.run(jsonData['TOKEN'])
+if __name__ == "__main__":
+	bot.run(jsonData['TOKEN'])
