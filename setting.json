@@ -1,4 +1,10 @@
 {
     "TOKEN" : "ODYzNzU5MjY1NjEyNTYyNDky.YOrkgA.ydTXU91EJmEWlJcc_ZEXoKWPcn0",
-    "Main_channel" : "863469068082216981"
+    "Main_channel" : "863469068082216981",
+
+    "capoo_pic" : ["D:\\Github Projects\\Discord Bot\\pictures\\capoo1.png","D:\\Github Projects\\Discord Bot\\pictures\\capoo2.png"],
+    "url_pic" : ["https://i4.disp.cc/imgur/sXnVhtB.jpg",
+                "https://i.pinimg.com/originals/2b/fb/6c/2bfb6c9cabd6b7140b0c1a31c2b8b06d.jpg",
+                "https://cdn5.cybassets.com/s/files/9324/ckeditor/pictures/content_3ad6aa3b-4288-43ca-a0a2-2d7c174599c1.jpg",
+                "https://i.pinimg.com/originals/53/ea/64/53ea64cf71f62a7c10af39ed5af0e6ef.jpg"]
 }
