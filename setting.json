@@ -1,6 +1,7 @@
 {
     "TOKEN" : "ODYzNzU5MjY1NjEyNTYyNDky.YOrkgA.ijA3C1zyhYjSTWoELWevphlVTbA",
     "Main_channel" : "863469068082216981",
+    "pic_lib" : ".\\pictures\\pic_lib.json",
 
     "capoo_pic" : [".\\pictures\\capoo1.png",".\\pictures\\capoo2.png"],
     "url_pic" : ["https://i4.disp.cc/imgur/sXnVhtB.jpg",
