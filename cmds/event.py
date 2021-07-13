@@ -27,8 +27,8 @@ class Event(Cog_Extension):
         if msg.content == 'peko' and msg.author != self.bot.user: #!!!防止無限循環
             await msg.channel.send('peko')
 
-        if msg.content.endswith('peko') and msg.author != self.bot.user:
-            await msg.channel.send('好油喔 peko')
+        # if msg.content.endswith('peko') and msg.author != self.bot.user:
+        #     await msg.channel.send('好油喔 peko')
         
 
 def setup(bot):
