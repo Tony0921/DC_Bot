@@ -22,6 +22,7 @@ class React(Cog_Extension):
 	@commands.command()
 	async def clean(self, ctx, num:int):
 		await ctx.channel.purge(limit=num+1)
+		await ctx.send(f"""```diff\n-Delete {num} message.\n```""")
 
 	@commands.command()
 	async def pic(self, ctx, name:str):
