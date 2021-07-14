@@ -42,7 +42,7 @@ class React(Cog_Extension):
 			data[name] = url
 			with open(source, 'w', encoding='utf8') as wf:
 				json.dump(data, wf)
-			await ctx.send("Add success!")
+			await ctx.send("Add successed!")
 		else:
 			await ctx.send("Unsuccessed!")
 
@@ -58,6 +58,16 @@ class React(Cog_Extension):
 			await ctx.send("Remove successed!")
 		except KeyError:
 			await ctx.send(f'{name} is not in library!')
+
+	@commands.command()
+	async def rmv_pic_all(self, ctx):
+		source = jsonData['pic_lib']
+		with open(source, mode='r', encoding='utf8') as rf:
+			data = json.load(rf)
+		data = {}
+		with open(source, 'w', encoding='utf8') as wf:
+			json.dump(data, wf)
+		await ctx.send("Library is clear!")
 
 	@commands.command()
 	async def pic_lib(self, ctx):
@@ -80,6 +90,7 @@ class React(Cog_Extension):
 		embed.add_field(name="!pic [name]", value="URL圖庫圖片", inline=False)
 		embed.add_field(name="!add_pic [name] [URL]", value="新增URL圖片", inline=False)
 		embed.add_field(name="!rmv_pic [name]", value="刪除URL圖片", inline=False)
+		embed.add_field(name="!rmv_pic_all", value="刪除圖庫所有圖片", inline=False)
 		embed.add_field(name="!pic_lib", value="查看圖庫", inline=False)
 		# embed.add_field(name="!rand_pic", value="圖庫隨機圖片", inline=False)
 		# embed.add_field(name="!url_pic", value="網址圖庫隨機圖片", inline=False)
