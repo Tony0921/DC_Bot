@@ -85,18 +85,14 @@ class React(Cog_Extension):
 
 	@commands.command()
 	async def cmd(self,ctx):
+		source = jsonData['cmd_list']
+		with open(source, mode='r', encoding='utf8') as rf:
+			data = json.load(rf)
 		embed=discord.Embed(title="Bot Commands", color=0xfbff00,timestamp=TWtime.localize(datetime.datetime.now()))
 		embed.set_author(name="小煜 Bot")
 		embed.set_thumbnail(url="https://icon-library.com/images/command-line-512.png")
-		embed.add_field(name="!pic [name]", value="URL圖庫圖片", inline=False)
-		embed.add_field(name="!add_pic [name] [URL]", value="新增URL圖片", inline=False)
-		embed.add_field(name="!rmv_pic [name]", value="刪除URL圖片", inline=False)
-		embed.add_field(name="!rmv_pic_all", value="刪除圖庫所有圖片", inline=False)
-		embed.add_field(name="!pic_lib", value="查看圖庫", inline=False)
-		# embed.add_field(name="!rand_pic", value="圖庫隨機圖片", inline=False)
-		# embed.add_field(name="!url_pic", value="網址圖庫隨機圖片", inline=False)
-		embed.add_field(name="!sayd [you want to say]", value="機器人幫你說", inline=False)
-		embed.add_field(name="!clean [num]", value="清除n筆訊息", inline=False)
+		for k, v in data.items():
+			embed.add_field(name=k, value=v, inline=False)
 		embed.set_footer(text="Made by Tony Chen")
 		await ctx.send(embed=embed)
 

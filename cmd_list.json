@@ -1,0 +1,9 @@
+{
+    "!pic [name]" : "URL圖庫圖片",
+    "!add_pic [name] [URL]" : "新增URL圖片",
+    "!rmv_pic [name]" : "刪除URL圖片",
+    "!rmv_pic_all" : "刪除圖庫所有圖片",
+    "!pic_lib" : "查看圖庫",
+    "!sayd [you want to say]" : "機器人幫你說",
+    "!clean [num]" : "清除n筆訊息"
+}

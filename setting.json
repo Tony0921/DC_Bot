@@ -2,7 +2,8 @@
     "TOKEN" : "ODYzNzU5MjY1NjEyNTYyNDky.YOrkgA.ijA3C1zyhYjSTWoELWevphlVTbA",
     "Main_channel" : "863469068082216981",
     "test_channel" : "",
-    "pic_lib" : ".\\pictures\\pic_lib.json",
+    "pic_lib" : "pic_lib.json",
+    "cmd_list" : "cmd_list.json",
 
     "capoo_pic" : [".\\pictures\\capoo1.png",".\\pictures\\capoo2.png"],
     "url_pic" : ["https://i4.disp.cc/imgur/sXnVhtB.jpg",
