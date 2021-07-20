@@ -1,13 +1,17 @@
 import discord
 from discord.ext import commands
+from discord.flags import Intents
 import json
 import random
 import os
 
+intents = discord.Intents.default()
+intents.members = True
+
 with open('setting.json', mode='r', encoding='utf8') as jsonFile:
 	jsonData = json.load(jsonFile)
 
-bot = commands.Bot(command_prefix='!')
+bot = commands.Bot(command_prefix='!',intents = intents)
 
 @bot.event
 async def on_ready():
