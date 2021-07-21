@@ -9,15 +9,14 @@ with open('setting.json', mode='r', encoding='utf8') as jsonFile:
 class Event(Cog_Extension):
 	@commands.Cog.listener()
 	async def on_member_join(self,member):
-		print(f'{member}join!')
-		channel = self.bot.get_channel(int(jsonData['Main_channel']))
-		await channel.send(f'{member}join!')
+		guild = member.guild
+		role = member.guild.get_role(703676601010880633)
+		await member.send(f"歡迎加入 {guild} 伺服器!")
+		await member.add_roles(role)		
 
 	@commands.Cog.listener()
 	async def on_member_remove(self, member):
-		print(f'{member}leave!')
-		channel = self.bot.get_channel(int(jsonData['Main_channel']))
-		await channel.send(f'{member}leave!')
+		await member.send(f"你離開了 {member.guild} 伺服器。")
 
 	@commands.Cog.listener()
 	async def on_raw_reaction_add(self,info):
