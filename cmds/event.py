@@ -50,15 +50,14 @@ class Event(Cog_Extension):
 		if msg.content == '...':
 			await msg.channel.send('你才點點點，你全家點點點= =')
 
-		# if msg.content == 'peko' and msg.author != self.bot.user: #!!!防止無限循環
-		# 	await msg.channel.send('peko')
-
 		if msg.content == 'capoo' and msg.author != self.bot.user: #!!!防止無限循環
 			await msg.channel.send('capoo')
 
 		if msg.content.endswith('peko') and msg.author != self.bot.user:
 			await msg.channel.send('好油喔 peko')
-		
+
+		if msg.content == '<:AOV:866962499604840469>':
+			await msg.channel.send(f"<@&745307828167901304>, {str(msg.author)[:-5]} 糾團打傳說啦!快跟上!")
 
 def setup(bot):
 	bot.add_cog(Event(bot))
