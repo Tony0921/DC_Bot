@@ -57,7 +57,10 @@ class Event(Cog_Extension):
 			await msg.channel.send('好油喔 peko')
 
 		if msg.content == '<:AOV:866962499604840469>':
-			await msg.channel.send(f"<@&745307828167901304>, {str(msg.author)[:-5]} 糾團打傳說啦!快跟上!")
+			await msg.channel.send(f"<@&745307828167901304>, {str(msg.author)[:-5]} 糾團打傳說啦！快跟上！")
+		
+		if msg.content == '<:Apex:866962310874136587>':
+			await msg.channel.send(f"<@&779587792669638656>, {str(msg.author)[:-5]} 正在糾團！特務們快跟上腳步！")
 
 def setup(bot):
 	bot.add_cog(Event(bot))
