@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from core.classes import Cog_Extension
-import json, asyncio,datetime
+import json, asyncio, datetime
 
 import urllib.request as req
 
@@ -23,12 +23,13 @@ class Task(Cog_Extension):
 
 		async def interval():
 			await self.bot.wait_until_ready()
-			self.channal = self.bot.get_channel(882186376555159582)
+			self.channel = self.bot.get_channel(882186376555159582)
 			while not self.bot.is_closed():
 				await self.channel.send("do something")
-				await asyncio.sleep(5)
+				await asyncio.sleep(60)
 
 		self.bg_task = self.bot.loop.create_task(interval())
+
 
 def setup(bot):
 	bot.add_cog(Task(bot))
