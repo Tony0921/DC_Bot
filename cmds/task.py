@@ -53,12 +53,17 @@ class Task(Cog_Extension):
 	async def my_background_task(self):
 		self.channel = self.bot.get_channel(882186376555159582)
 		# await self.channel.send("task loop")
-		newData = getLiveJSON("3686713")
-		dicData = json.loads(newData)
-		live_info = dicData['data']['live_info']
-		if langLiveNotify(live_info) == 1:
-			liveRoomUrl = "https://www.lang.live/room/" + live_info['pretty_id']
-			await self.channel.send(live_info['nickname'] + " 開台了\n" + liveRoomUrl)
+		localDataPath = jsonData['lang_live_status']
+		with open(localDataPath, 'r', encoding='utf8') as rf:
+			localData = json.load(rf)
+		for k, v in localData.items():
+			# embed.add_field(name=k, value=v, inline=False)
+			newData = getLiveJSON(v['id'])
+			dicData = json.loads(newData)
+			live_info = dicData['data']['live_info']
+			if langLiveNotify(live_info) == 1:
+				liveRoomUrl = "https://www.lang.live/room/" + live_info['pretty_id']
+				await self.channel.send(live_info['nickname'] + " 開台了\n" + liveRoomUrl)
 
 	@my_background_task.before_loop
 	async def before_my_task(self):
