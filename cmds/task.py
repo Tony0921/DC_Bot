@@ -51,7 +51,7 @@ class Task(Cog_Extension):
 
 	@tasks.loop(seconds=60)
 	async def my_background_task(self):
-		self.channel = self.bot.get_channel(882186376555159582)
+		self.channel = self.bot.get_channel(882597035411386388)
 		# await self.channel.send("task loop")
 		localDataPath = jsonData['lang_live_status']
 		with open(localDataPath, 'r', encoding='utf8') as rf:
