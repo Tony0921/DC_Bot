@@ -33,7 +33,7 @@ def langLiveNotify(live_info):
 	if localData[nickname]['live_status'] != live_status:
 		localData[nickname]['live_status'] = live_status
 		with open(localDataPath, 'w', encoding='utf8') as wf:
-			json.dumps(localData, wf, indent=4)
+			wf.write(json.dumps(localData, indent=4))
 		if live_status == 1:
 			print("開台了")
 			return 1
