@@ -96,5 +96,5 @@ class React(Cog_Extension):
 		embed.set_footer(text="Made by Tony Chen")
 		await ctx.send(embed=embed)
 
-def setup(bot):
-	bot.add_cog(React(bot))
+async def setup(bot):
+	await bot.add_cog(React(bot))

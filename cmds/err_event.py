@@ -16,5 +16,5 @@ class Err_event(Cog_Extension):
 		else:
 			await ctx.send(f"""```diff\n-Error.-\n{error}.\n```""")
 
-def setup(bot):
-	bot.add_cog(Err_event(bot))
+async def setup(bot):
+	await bot.add_cog(Err_event(bot))

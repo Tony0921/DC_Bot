@@ -62,5 +62,5 @@ class Event(Cog_Extension):
 		if msg.content == '<:Apex:866962310874136587>':
 			await msg.channel.send(f"<@&779587792669638656>, {str(msg.author)[:-5]} 正在糾團！特務們快跟上腳步！")
 
-def setup(bot):
-	bot.add_cog(Event(bot))
+async def setup(bot):
+	await bot.add_cog(Event(bot))
