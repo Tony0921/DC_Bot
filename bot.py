@@ -8,6 +8,7 @@ import asyncio
 
 intents = discord.Intents.default()
 intents.members = True
+intents.message_content = True
 
 with open('setting.json', mode='r', encoding='utf8') as jsonFile:
 	jsonData = json.load(jsonFile)
@@ -26,12 +27,12 @@ async def load(ctx, extension):
 
 @bot.command()
 async def unload(ctx, extension):
-	bot.unload_extension(f'cmds.{extension}')
+	await bot.unload_extension(f'cmds.{extension}')
 	await ctx.send(f'Unloaded {extension} done.')
 
 @bot.command()
 async def reload(ctx, extension):
-	bot.reload_extension(f'cmds.{extension}')
+	await bot.reload_extension(f'cmds.{extension}')
 	await ctx.send(f'Reloaded {extension} done.')
 
 async def load_extensions():

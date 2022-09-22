@@ -77,7 +77,7 @@ class React(Cog_Extension):
 			data = json.load(rf)
 		embed=discord.Embed(title="圖片庫", color=0x00d9ff,timestamp=TWtime.localize(datetime.datetime.now()))
 		embed.set_author(name="小煜 Bot")
-		embed.set_thumbnail(url="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Picture_icon_BLACK.svg/1200px-Picture_icon_BLACK.svg.png")
+		embed.set_thumbnail(url="https://i.imgur.com/PTo1ktE.png")
 		for k, v in data.items():
 			embed.add_field(name=k, value=v, inline=False)
 		embed.set_footer(text="Made by Tony Chen")
@@ -90,7 +90,7 @@ class React(Cog_Extension):
 			data = json.load(rf)
 		embed=discord.Embed(title="Bot Commands", color=0xfbff00,timestamp=TWtime.localize(datetime.datetime.now()))
 		embed.set_author(name="小煜 Bot")
-		embed.set_thumbnail(url="https://icon-library.com/images/command-line-512.png")
+		embed.set_thumbnail(url="https://i.imgur.com/JJdbo1G.png")
 		for k, v in data.items():
 			embed.add_field(name=k, value=v, inline=False)
 		embed.set_footer(text="Made by Tony Chen")
