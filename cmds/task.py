@@ -54,13 +54,16 @@ def langLiveNotify(live_info):
 async def getLiveTime():
 	# 設定chrome
 	options = Options()
+	options.add_argument("--headless")
 	options.add_argument("--disable-notifications")
+	options.add_argument("--no-sandbox")
+	options.add_argument("User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36")
 	options.add_experimental_option("excludeSwitches", ['enable-automation', 'enable-logging'])
 	
 	# 開啟chrome
 	chrome = webdriver.Chrome('./chromedriver', chrome_options=options)
 	chrome.get("https://zh-tw.facebook.com/AKB48TeamTP")
-	await asyncio.sleep(3)
+	await asyncio.sleep(600)
 
 	# 滾動捲軸
 	for x in range(1, 3):
@@ -99,8 +102,10 @@ async def getLiveTime():
 				if '月' in tmp_text and '日' in tmp_text:
 					date_text = tmp_text
 				if post.getText().startswith('林于馨'):
-					total_text += date_text + "\n"
-					total_text += post.getText() +"\n"
+					liveTime = post.getText()
+					# print(date_text)
+					# print(liveTime)
+					total_text += date_text + "\n" + liveTime + "\n"
 					date_text = ""
 	chrome.quit()
 
@@ -110,7 +115,7 @@ class Task(Cog_Extension):
 	def __init__(self, *args, **kwargs):
 		super().__init__( *args, **kwargs)
 		self.my_background_task.start()
-		self.crawler_task.start()
+		# self.crawler_task.start()
 		
 
 	async def on_ready(self):
@@ -130,15 +135,14 @@ class Task(Cog_Extension):
 				self.channel = self.bot.get_channel(882597035411386388)
 				await self.channel.send(live_info['nickname'] + " 開台了\n" + liveRoomUrl)
 
-	@tasks.loop(seconds=60)
-	async def crawler_task(self):
 		now_time = datetime.datetime.now()
 		now_h = now_time.hour
 		now_m = now_time.minute
 		now_wd = now_time.weekday()+1
 		print(now_time)
-		if now_wd==3 and now_h==22 and now_m==52:
+		if now_wd==3 and now_h==0 and now_m==23:
 			result = await getLiveTime()
+			print(result)
 			self.channel = self.bot.get_channel(945336871804895282)
 			print("web crawler success!")
 			await self.channel.send(result)
