@@ -10,8 +10,8 @@ intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 
-with open('setting.json', mode='r', encoding='utf8') as jsonFile:
-	jsonData = json.load(jsonFile)
+with open('private_files/token.json', mode='r', encoding='utf8') as jsonFile:
+	token = json.load(jsonFile)
 
 bot = commands.Bot(command_prefix='!',intents = intents)
 
@@ -43,7 +43,7 @@ async def load_extensions():
 async def main():
 	async with bot:
 		await load_extensions()
-		await bot.start(jsonData['TOKEN'])
+		await bot.start(token['TOKEN'])
 
 asyncio.run(main())
 
