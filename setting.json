@@ -4,5 +4,6 @@
     "pic_lib" : "pic_lib.json",
     "cmd_list" : "cmd_list.json",
     "roles" : "roles.json",
-    "lang_live_status" : "lang_live_status.json"
+    "lang_live_status" : "lang_live_status.json",
+    "getLiveTime" : "getLiveTime.json"
 }

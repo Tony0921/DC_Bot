@@ -31,7 +31,7 @@ def getLiveJSON(id):
 		print("send!")
 	return data
 
-def langLiveNotify(live_info):
+def getLiveStatus(live_info):
 	#loaded data
 	nickname = live_info['nickname']
 	live_status = live_info['live_status']
@@ -63,7 +63,7 @@ async def getLiveTime():
 	# 開啟chrome
 	chrome = webdriver.Chrome('./chromedriver', chrome_options=options)
 	chrome.get("https://zh-tw.facebook.com/AKB48TeamTP")
-	await asyncio.sleep(600)
+	await asyncio.sleep(5)
 
 	# 滾動捲軸
 	for x in range(1, 3):
@@ -71,7 +71,7 @@ async def getLiveTime():
 		await asyncio.sleep(3)
 
 	scripts = "\
-	var elements = document.getElementsByClassName('oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl gpro0wi8 oo9gr5id lrazzd5p');\
+	var elements = document.getElementsByClassName('qi72231t nu7423ey n3hqoq4p r86q59rh b3qcqh3k fq87ekyn bdao358l fsf7x5fv rse6dlih s5oniofx m8h3af8h l7ghb35v kjdc1dyq kmwttqpk srn514ro oxkhqvkx rl78xhln nch0832m cr00lzj9 rn8ck1ys s3jn8y49 icdlwmnq cxfqmxzd pbevjfx6 innypi6y');\
 	for(let i=0;i < elements.length;i++){\
 		if(elements[i].innerHTML=='顯示更多'){\
 			console.log(elements[i].innerHTML);\
@@ -84,7 +84,7 @@ async def getLiveTime():
 
 	# HTML解析
 	root = bs4.BeautifulSoup(chrome.page_source, "html.parser")
-	str1 = 'd2edcug0 hpfvmrgz qv66sw1b c1et5uql lr9zc1uh a8c37x1j fe6kdd0r mau55g9w c8b282yb keod5gw0 nxhoafnm aigsh9s9 d3f4x2em iv3no6db jq4qci2q a3bd9o3v b1v8xokw oo9gr5id hzawbc8m'
+	str1 = 'gvxzyvdx aeinzg81 t7p7dqev gh25dzvf exr7barw b6ax4al1 gem102v4 ncib64c9 mrvwc6qr sx8pxkcf f597kf1v cpcgwwas m2nijcs8 hxfwr5lz k1z55t6l oog5qr5w tes86rjd pbevjfx6 ztn2w49o'
 	targets = root.find_all('span',{'class':str1})
 
 	total_text = ""
@@ -116,13 +116,17 @@ class Task(Cog_Extension):
 		super().__init__( *args, **kwargs)
 		self.my_background_task.start()
 		# self.crawler_task.start()
-		
 
 	async def on_ready(self):
 		print("on ready")
 
+	def cog_unload(self):
+		print("task unload")
+		self.my_background_task.cancel()
+
 	@tasks.loop(seconds=60)
 	async def my_background_task(self):
+		#langLiveNotify
 		localDataPath = jsonData['lang_live_status']
 		with open(localDataPath, 'r', encoding='utf8') as rf:
 			localData = json.load(rf)
@@ -130,22 +134,27 @@ class Task(Cog_Extension):
 			newData = getLiveJSON(v['id'])
 			dicData = json.loads(newData)
 			live_info = dicData['data']['live_info']
-			if langLiveNotify(live_info) == 1:
+			if getLiveStatus(live_info) == 1:
 				liveRoomUrl = "https://www.lang.live/room/" + live_info['pretty_id']
 				self.channel = self.bot.get_channel(882597035411386388)
 				await self.channel.send(live_info['nickname'] + " 開台了\n" + liveRoomUrl)
 
+		#getLiveTime
 		now_time = datetime.datetime.now()
 		now_h = now_time.hour
 		now_m = now_time.minute
 		now_wd = now_time.weekday()+1
 		print(now_time)
-		if now_wd==3 and now_h==0 and now_m==23:
+		timeSetting = jsonData['getLiveTime']
+		with open(timeSetting, 'r', encoding='utf8') as rf:
+			_time = json.load(rf)
+		if now_wd==_time['wd'] and now_h==_time['h'] and now_m==_time['m']:
 			result = await getLiveTime()
 			print(result)
 			self.channel = self.bot.get_channel(945336871804895282)
 			print("web crawler success!")
-			await self.channel.send(result)
+			if result != "":
+				await self.channel.send(result)
 
 	@my_background_task.before_loop
 	async def before_my_task(self):
