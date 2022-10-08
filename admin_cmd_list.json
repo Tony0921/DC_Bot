@@ -1,0 +1,5 @@
+{
+    "!add_emoji_roles [emoji name] [emoji id] [role id]" : "新增貼圖回應身份組",
+    "!rmv_emoji_roles [emoji name] [emoji id] [role id]" : "刪除貼圖回應身份組",
+    "!role_list" : "查看貼圖回應身份組清單"
+}

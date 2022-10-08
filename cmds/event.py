@@ -25,11 +25,17 @@ class Event(Cog_Extension):
 			data = json.load(rf)
 		if info.message_id == 866975390589255690:
 			for k, v in data.items():
+				print(info.emoji)
 				if str(info.emoji) == k:
 					guild = self.bot.get_guild(info.guild_id)
 					role = guild.get_role(int(v))
 					await info.member.add_roles(role)
 					await info.member.send(f"你在 {guild.name} 取得了 {role} 身分組!")
+		if info.message_id == 1028282045434175581:
+			print(info.emoji)
+			guild = self.bot.get_guild(info.guild_id)
+			await info.member.send(f"{info.emoji}\n 貼圖名: {info.emoji.name}\n ID: {info.emoji.id}")
+					
 
 	@commands.Cog.listener()
 	async def on_raw_reaction_remove(self, info):
@@ -38,6 +44,7 @@ class Event(Cog_Extension):
 			data = json.load(rf)
 		if info.message_id == 866975390589255690:
 			for k, v in data.items():
+				print(info.emoji)
 				if str(info.emoji) == k:
 					guild = self.bot.get_guild(info.guild_id)
 					user = guild.get_member(info.user_id)
