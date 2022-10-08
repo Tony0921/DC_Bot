@@ -66,7 +66,7 @@ async def getLiveTime():
 	await asyncio.sleep(5)
 
 	# 滾動捲軸
-	for x in range(1, 3):
+	for x in range(1, 2):
 		chrome.execute_script("window.scrollTo(0,document.body.scrollHeight)")
 		await asyncio.sleep(3)
 
