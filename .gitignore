@@ -1,3 +1,4 @@
 private_files/
 cmds/__pycache__/
 core/__pycache__/
+chromedriver.exe
