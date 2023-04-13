@@ -31,7 +31,9 @@ To use DC_Bot in your Discord server, you will need to create a new bot applicat
 ```
 
 Then, run the bot by running the `bot.py` file.
-```python bot.py```
+```
+python bot.py
+```
 
 ## Usage
 The bot's commands can be accessed by typing `!help` in any text channel the bot has access to. This will display a list of available commands and their descriptions.
